@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.domain.ClubUser;
+import com.example.demo.domain.ClubUser.ClubRole;
 
 @Repository
 public interface ClubUserRepository extends JpaRepository<ClubUser, Long>{
@@ -17,4 +18,10 @@ public interface ClubUserRepository extends JpaRepository<ClubUser, Long>{
     boolean existsByUsername(String username);
     
     boolean existsByEmail(String email);
+    
+    // 사용자 통계를 위한 메서드들
+    long countByEnabledTrue();
+     
+    long countByRolesContaining(ClubRole role);
+    
 }

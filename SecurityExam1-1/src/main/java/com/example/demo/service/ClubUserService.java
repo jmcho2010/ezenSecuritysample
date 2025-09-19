@@ -56,7 +56,27 @@ public class ClubUserService {
         return !userRepository.existsByEmail(email);
     }
 	
-	
+	// VIP 승급 메서드(promoteToVip)
+    // 1. VIP로 승급시킬 사람의 정보(ID)가 필요
+    // 2. VIP 권한만 업데이트(저장)시키면됨.
+    
+    // VIP 승급 메서드
+    public void promoteToVip(String username) {
+        ClubUser user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다: " + username));
+        
+        user.getRoles().add(ClubRole.ROLE_VIP);
+        userRepository.save(user);
+        System.out.println("🌟 " + username + "님이 VIP로 승급되었습니다!");
+    }
+   
+    
+    
+    
+    
+    
+    
+    
 	
 	
 
